@@ -1,12 +1,11 @@
-import seaborn
-import pandas as pd
+from decimal import Decimal
 import matplotlib.pyplot as plt
+import numpy as np
+import pandas as pd
+import seaborn
 from sklearn.svm import SVC
 from sklearn.model_selection import train_test_split
-from decimal import Decimal
 
-import numpy as np
-import matplotlib.pyplot as plt
 
 def make_meshgrid(ax, h=.02):
     x_min, x_max = ax.get_xlim()
@@ -16,13 +15,11 @@ def make_meshgrid(ax, h=.02):
                          np.arange(y_min, y_max, h))
     return xx, yy
 
-
 def plot_contours(ax, clf, xx, yy, **params):
     Z = clf.predict(np.c_[xx.ravel(), yy.ravel()])
     Z = Z.reshape(xx.shape)
     out = ax.contourf(xx, yy, Z, **params)
     return out
-
 
 def draw_boundary(ax, clf):
     xx, yy = make_meshgrid(ax)
@@ -35,7 +32,6 @@ tenths = [x * Decimal('0.1') for x in range(1, 51)]
 optimal_gamma = 0
 optimal_C = 0
 
-
 def ask_user():
   answer = input("""
   Which player would you like to analyze?:
@@ -43,6 +39,7 @@ def ask_user():
   B: David Ortiz
   C: Jose Altuve
   """)
+
   if (answer == 'A') or (answer == 'a'):
     return aaron_judge
   if (answer == 'B') or (answer == 'b'):
@@ -94,4 +91,5 @@ def graph_strikezone():
 
   print("Optimal accuracy score of model: {}".format(round(final_score, 4)))
 
-graph_strikezone()
+if __name__ == "__main__":    
+    graph_strikezone()
